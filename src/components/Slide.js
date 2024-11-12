@@ -43,7 +43,7 @@ const Slider = ({data}) => {
             <div className="overlay"></div>
             <div className="content">
               <h2>{slide.title}</h2>
-              <p>{slide.background == '' ? slide.synopsis : slide.background}</p>
+              <p>{slide.background == '' ? slide.synopsis.slice(0, 450) : slide.background.slice(0, 450)} ...See More</p>
               <button className="watch-now-btn">Watch Now</button>
             </div>
           </div>
