@@ -246,6 +246,15 @@ p {
 
 
 @media (max-width: 570px) {
+  .search{
+    display: none;
+  }
+  .slider{
+    height: 50vh;
+  }
+  .slide{
+    height: 50vh;
+  }
   .content{
     padding-inline: 1rem;
   }
