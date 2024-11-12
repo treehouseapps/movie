@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Slider = () => {
+const Slider = ({data}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -37,13 +37,13 @@ const Slider = () => {
           transform: `translateX(-${currentSlide * 100}%)`
         }}
       >
-        {slides.map((slide, index) => (
+        {data.map((slide, index) => (
           <div key={index} className="slide">
-            <img src={slide.image} alt={slide.title} className="background-image" />
+            <img src={slide.trailer.images.maximum_image_url} alt={slide.title} className="background-image" />
             <div className="overlay"></div>
             <div className="content">
               <h2>{slide.title}</h2>
-              <p>{slide.description}</p>
+              <p>{slide.background == '' ? slide.synopsis : slide.background}</p>
               <button className="watch-now-btn">Watch Now</button>
             </div>
           </div>

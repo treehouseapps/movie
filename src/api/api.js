@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 const Data = [
     {
         id: 3,
@@ -54,5 +56,7 @@ const Data = [
         genre: "Action/ Comedy Thriler"
     },
 ]
+
+
 
 export default Data;
