@@ -246,12 +246,29 @@ p {
 
 
 @media (max-width: 570px) {
+  .content{
+    padding-inline: 1rem;
+  }
+  .content h2{
+    font-size: 2rem;
+  }
+  .content p{
+    font-size: .8rem;
+  }
   .movies-list-container{
     padding-inline: 1rem;
     
   }
-  .movies {
-
+  .movies-list {
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
+  .movie{
+    width: 10rem;
+  }
+  
+  .movie img{
+    height: 15rem;
   }
 }
 
