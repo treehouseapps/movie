@@ -5,19 +5,19 @@ const Slider = () => {
 
   const slides = [
     {
-      image: '/assets/cover/cover.jpg',
+      image: '/529615.jpg',
       title: 'Avengers',
-      description: 'On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. '
+      description: 'On a mission ollect all six Infinity Stones, mission ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict himission ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict himission ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict hi Thanos plans to use the artifacts to inflict his twisollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twis ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twis to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. '
     },
     {
-      image: '/assets/cover/cover.jpg',
+      image: '/1.jpg',
       title: 'Avengers: Age of Ultron',
-      description: 'On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. '
+      description: 'On a mission to ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twis ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twis ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twis collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. ollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisollect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twis'
     },
     {
       image: '/assets/cover/cover.jpg',
       title: 'Avengers: Infinity War',
-      description: 'On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality.'
+      description: 'On a mission to collect all six Infinity Stones, ll six Infinity Stones, mission ollect all six Infinity Stones, Thanos  ll six Infinity Stones, mission ollect all six Infinity Stones, Thanos  ll six Infinity Stones, mission ollect all six Infinity Stones, Thanos  Thanos plans to use the artifacts to inflict his twisted will on reality.'
     }
   ];
 
@@ -44,6 +44,7 @@ const Slider = () => {
             <div className="content">
               <h2>{slide.title}</h2>
               <p>{slide.description}</p>
+              <button className="watch-now-btn">Watch Now</button>
             </div>
           </div>
         ))}

@@ -3,7 +3,7 @@ const MovieList = props => {
 
   return (
     <div className="movies-list-container">
-      <h2 className="section-title"> Popular Movies </h2>
+      <h1 className="section-title"> Popular Movies </h1>
       <div className="movies-list">
         {data.map(item => (
           <div className="movie" key={item.id}>

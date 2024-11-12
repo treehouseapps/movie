@@ -1,15 +1,15 @@
 const Navbar = () => {
     return (
-        <div>
+        
             <div className="navbar">
-                    <i className="bi bi-view-stacked"></i>
-                    <div className="search">
-                        <i className="bi bi-search"></i>
-                        <input type="text" placeholder="search..." />
-                        <button className="btn btn-primary">GO</button>
-                    </div>
+                <p className="brand">Random <span className="theme-color">Movies</span></p>
+                <div className="search">
+                    <i className="bi bi-search"></i>
+                    <input type="text" placeholder="Search..." />
+                    <button className="btn btn-primary">GO</button>
+                </div>
             </div>
-        </div>
+        
     );
 }
 
