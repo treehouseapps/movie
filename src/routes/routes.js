@@ -3,6 +3,7 @@ import Endpoints from "../api/endpoints";
 import Home from "../service/home"
 import Footer from "../components/footer"
 import Movies from "../service/movies";
+import MovieDetails from "../service/MovieDetails";
 const PageRoutes = () => {
 
     return (
@@ -11,6 +12,7 @@ const PageRoutes = () => {
                 <Routes>
                     <Route path={Endpoints.home} element={<Home />} />
                     <Route path={Endpoints.movies} element={<Movies />} />
+                    <Route path={Endpoints.movie} element={<MovieDetails />} />
                 </Routes>
                 <Footer />
             </div>
