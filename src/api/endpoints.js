@@ -1,6 +1,7 @@
 const Endpoints = {
     home: "/",
-    movies: "/movies"
+    movies: "/movies",
+    movie: "/movie/:id"
 }
 
 export default Endpoints;
