@@ -50,7 +50,8 @@ const FloatingButton = styled(IconButton)(({ theme }) => ({
   left: '10px', 
   zIndex: '898', 
   color: '#d32f2f',
-  border: '1px solid #d32f2f'
+  backgroundColor: '#fff',
+  border: '1px solid #fff'
 }))
 
 const Navbar = () => {
@@ -63,18 +64,18 @@ const Navbar = () => {
   return (
     <ThemeProvider theme={themes}>
       <CssBaseline />
-      <Box >
+      <Box>
         <AppBar position="absolute"
          elevation={0}
          color="transparent"
-         sx={{ border: '0px solid white', py: 2}}>
+         sx={{ border: '0px solid white', py: 2, width: 'fit-content', left: 0}}>
           <Toolbar>
             <IconButton
               size="large"
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              sx={{width: '50px', height: '50px', mr: 2}}
+              sx={{width: '50px', height: '50px', mr: 2, }}
               onClick={ toggleDrawer }>
               <MenuIcon edge="start" sx={{fontSize: '34px', color: "white" }} />
             </IconButton>
