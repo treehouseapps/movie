@@ -8,3 +8,5 @@ export const getPrimaryGenres = (movieGenreIds, allGenres) => {
   // Limit to the first two genres if there are more than two
   return movieGenres.length > 2 ? movieGenres.slice(0, 2) : movieGenres;
 };
+
+// genre related utility functions will be listed here 
