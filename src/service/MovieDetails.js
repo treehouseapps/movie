@@ -131,7 +131,7 @@ const MovieDetails = () => {
               display: 'flex',
               gap: 2,
             }}>
-              <Button size="small" variant="outlined" sx={{ color: 'white', border: '1px solid white', borderRadius: 1, px: 3}}> Watch Now </Button>
+              <Button size="small" variant="outlined" sx={{ color: 'white', border: '1px solid white', borderRadius: 1, px: 3 }}> Watch Now </Button>
               <Button size="small" variant="contained"> Watch Later </Button>
             </Box>
           </Box>
@@ -141,7 +141,11 @@ const MovieDetails = () => {
                 component="img"
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 sx={{
-                  width: '90%',
+                  width: {
+                    lg: '90%',
+                    md: '75%',
+                    xs: '50%' 
+                  },
                   borderRadius: 1
                 }}
               />
