@@ -258,7 +258,7 @@ const MovieDetails = () => {
                 </Typography>
               </Box>
               <Box sx={{ 
-                  width: { lg: '100%', md: '480px', sm: '480px', xs: '480px' }, 
+                  maxWidth: { lg: '100%', md: '480px', sm: '480px', xs: '480px' }, 
                   height: { lg: 'fit-content', md: '270px', sm: '270px', xs: '270px' }, 
                   position: 'relative', mx: 'auto' }}>
                 <iframe src={`https://www.youtube.com/embed/${videos?.key}`} frameBorder="0" 
