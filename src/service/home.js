@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query"
 import axios from 'axios'
 import { Button } from '@mui/material';
+import { lazy, Suspense } from 'react'
 
 import Navbar from "../components/navbar";
 import Slide from "../components/Slide";

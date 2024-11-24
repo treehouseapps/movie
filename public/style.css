@@ -280,6 +280,24 @@ p {
 }
 
 
+.backgroundAnimation {
+  animation: bgAnimation 1.5s linear infinite;
+  box-shadow: none!important;
+  background-color: none;
+}
+
+@keyframes bgAnimation {
+  0% {
+    background-color: lightgray;
+  }
+  50% {
+    background-color: #e6e3e3 
+  }
+  100% {
+    background-color: lightgray;
+  }
+}
+
 @media (max-width: 570px) {
   .search {
     display: none;
@@ -323,6 +341,7 @@ p {
     height: 15rem;
   }
 }
+
 
 @media (max-width: 640px) {
   .movies-list-container {

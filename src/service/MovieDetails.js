@@ -5,6 +5,9 @@ import { Button, Typography, Grid, Box, createTheme, ThemeProvider, TextField, A
 import Stack from "@mui/material/Stack"
 import ButtonGroup from '@mui/material/ButtonGroup';
 import MenuIcon from '@mui/material/Menu';
+import PlayArrow from '@mui/icons-material/PlayArrow';
+import ShareIcon from '@mui/icons-material/Share'
+import WatchLaterIcon from '@mui/icons-material/WatchLater'
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,6 +22,9 @@ import { useQuery } from '@tanstack/react-query'
 import LoadingSpin from '../components/ui/loadingSpin'
 const theme = createTheme({
   typography: {
+    subtitle2: {
+      fontFamily: 'inherit'
+    },
     h5: {
       color: '#fff',
       fontFamily: 'inherit',
@@ -31,7 +37,7 @@ const theme = createTheme({
     },
     body1: {
       fontFamily: 'inherit',
-      color: ''
+      color: '#fff'
     }
   },
   palette: {
@@ -53,6 +59,8 @@ const theme = createTheme({
     }
   }
 })
+
+const arr = [1,2,3,4,5]
 
 // validation Schema 
 const schema = yup.object({
@@ -134,12 +142,24 @@ const MovieDetails = () => {
                 pointerEvents: 'none', // Ensures it doesn't block interactions
               }}
             />
-
+            <Box 
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 'fit-content',
+                height: 'fit-content'
+              }} >
+                <IconButton>
+                  <PlayArrow sx={{ color: '#d32f2f', bgcolor: 'white', opacity: .75, border: '0px solid white', borderRadius: '50%', height: '75px', width: '75px', p: 1}}/>
+                </IconButton>
+              </Box>
           </Box>
         </Grid>
-        <Grid item lg={8} md={10} xs={11} px={0} sx={{ overflow: 'clip', mx: 'auto', width: '100%', zIndex: '22', border: '0px solid white', mt: '-25vh' }}>
+        <Grid item lg={9} md={10} xs={11} px={0} sx={{ overflow: 'clip', mx: 'auto', width: '100%', zIndex: '22', border: '0px solid white', mt: '-25vh' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 3, pb: 5}} >
-            <Typography variant='h5'> {movie?.title} </Typography> 
+            <Typography variant='h5'> {movie?.title} ({movie.release_date.split('-')[0]})</Typography> 
             <Box sx={{
               display: 'flex',
               gap: 2,
@@ -174,9 +194,20 @@ const MovieDetails = () => {
                   px: { xs: 2, sm: 5, md: 0 },
                   width: '100%'
                 }}>
-                  <Button sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(125, 125, 125, 0.5)"}} size="small" variant="contained"> Watch Later </Button>
-                  <Button sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} size="small" variant="contained"> Add to Whitelist </Button>
-                  <Button sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} size="small" variant="contained"> Share </Button>
+                  <Button startIcon={<WatchLaterIcon />} sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(125, 125, 125, 0.5)"}} size="small" variant="contained"> Watch Later </Button>
+                  <Button 
+                    size="small" 
+                    variant="contained" 
+                    startIcon={<AddIcon />}
+                    sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} 
+                  > 
+                      Add to Whitelist 
+                    </Button>
+                  <Button 
+                    sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} 
+                    size="small"
+                    startIcon={<ShareIcon />} 
+                    variant="contained"> Share </Button>
                 
               </Stack>
             </Grid>
@@ -277,13 +308,112 @@ const MovieDetails = () => {
               </Box>
             </Grid>
           </Grid>
-          
+          <Grid item>
+            <Box sx={{ py: 2, borderBottom: '1px solid white' }}>
+              <Typography variant="h6">
+                Similar Movies
+              </Typography>
+            </Box>
+            <Grid container sx={{ py: 4, gap: '16px 0', justifyContent: 'space-between'}}>
+              { arr.map(a => (
+                <Grid lg={2.2}>
+                  <Box 
+                    component="img"
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    sx={{
+                      width: '100%',
+                      borderRadius: 1,
+                      // height: '270px',
+                      objectFit: 'cover'
+                    }}
+                  />
+                  <Typography variant="body1" sx={{ fontWeight: 'bold', my: 1}}>
+                    { movie?.title }
+                  </Typography>
+                  <Typography variant="subtitle2" sx={{ color: '#fff'}}>
+                    Horror | Action
+                  </Typography>
+                </Grid>
+                ))}
+              {/*<Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+                <Typography variant="body1" sx={{ fontWeight: 'bold', my: 1,}}>
+                  { movie?.title }
+                </Typography>
+                <Typography variant="subtitle2" sx={{ color: '#fff'}}>
+                  Horror/Action
+                </Typography>
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>*/}
+            </Grid>
+            <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center'}}>
+              <Button variant="contained" sx={{ fontFamily: 'inherit', width: 'fit-content', bgcolor: 'rgb(25, 25, 25)'}}>
+                Show More
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item xs={12} p={0} m={0}>
           { isPending && <LoadingSpin /> }
           
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} sx={{display: 'none'}}>
           <Box border="1px solid" borderRadius={1} p={2} mb={2}>
             <form onSubmit={handleSubmit(onSubmitt)}>
               <TextField label="Name" variant="outlined" fullWidth margin='normal' />

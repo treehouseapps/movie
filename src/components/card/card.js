@@ -21,9 +21,14 @@ const MovieList = ({ data, title }) => {
         {data?.map((item) => (
           <a href={`/movie/${item.id}`} className="movie" key={item.id}>
             <img
-              className="img-fluid"
+              className={`img-fluid ${ item.src ? "" :"backgroundAnimation" }`}
               src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-              alt={item.title}
+              alt={''}
+              style={{
+                width: '241px',
+                height: '362px',
+                // backgroundColor: item.src ? '' : 'lightgray' 
+              }}
             />
             <div className="card-body">
               <h6 className="card-title">{item.title || item.name }</h6>
