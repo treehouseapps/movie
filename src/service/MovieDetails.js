@@ -81,11 +81,24 @@ const MovieDetails = () => {
     console.log(response.data)
     return response.data
   }
+
+  const fetchTrailerLink = async () => {
+    const response = await api.get(`/movie/${id}/videos`)
+    return response.data.results[0] //get the first trailer only 
+  }
+
   const { data: movie, isPending, error } = useQuery({
     queryKey: ["movie"],
     queryFn: fetchMovieData,
     refetchInterval: 1000 * 60
   })
+
+  const { data: videos } = useQuery({
+    queryKey: ["videos"],
+    queryFn: fetchTrailerLink
+  })
+
+
 
   if(isPending) {
     return (
@@ -116,7 +129,7 @@ const MovieDetails = () => {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '60%', // Adjust the fading height
+                height: '75%', // Adjust the fading height
                 background: 'linear-gradient(transparent, black)',
                 pointerEvents: 'none', // Ensures it doesn't block interactions
               }}
@@ -124,33 +137,50 @@ const MovieDetails = () => {
 
           </Box>
         </Grid>
-        <Grid item lg={8} md={10} xs={11} sx={{ mx: 'auto', width: '100%', zIndex: '22', border: '0px solid white', mt: '-180px'}}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 3, borderBottom: '1px solid white', pb: 3, mb: 5}} >
+        <Grid item lg={8} md={10} xs={11} px={0} sx={{ overflow: 'clip', mx: 'auto', width: '100%', zIndex: '22', border: '0px solid white', mt: '-25vh' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 3, pb: 5}} >
             <Typography variant='h5'> {movie?.title} </Typography> 
             <Box sx={{
               display: 'flex',
               gap: 2,
             }}>
-              <Button size="small" variant="outlined" sx={{ color: 'white', border: '1px solid white', borderRadius: 1, px: 3 }}> Watch Now </Button>
-              <Button size="small" variant="contained"> Watch Later </Button>
+              <Button size="small" sx={{ color: 'white', bgcolor: 'rgba(173, 173, 173, 0.69)', borderRadius: 1, px: 2 }}> 
+                Imdb {movie?.vote_average}
+              </Button>
+              <Button size="small" variant="outlined" sx={{border: '1px solid white', color: '#fff'}}> Watch Later </Button>
             </Box>
           </Box>
-          <Grid container color="white" spacing={2}>
-            <Grid item xs={12} md={4} lg={2.5} p={0} m={0} border='0px solid white' >
+          <Grid container color="white" columnSpacing={5} sx={{borderBlock: '1px solid white', py: 5 }}>
+            <Grid item xs={12} md={4} lg={2.5} p={0} m={0} border='0px solid white' sx={{
+              display: 'flex',
+              justifyContent: { xs: 'start', md: 'start' },
+              alignItems: { xs: 'center', md: 'start' },
+              flexDirection: { xs: 'row', md: 'column' },
+              gap: { xs: 2, sm: 5, md: 0}
+            }}>
               <Box 
                 component="img"
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 sx={{
-                  width: {
-                    lg: '90%',
-                    md: '75%',
-                    xs: '50%' 
-                  },
+                  width: '100%',
                   borderRadius: 1
                 }}
               />
+              <Stack 
+                direction="column"
+                spacing={1}
+                sx={{
+                  py: 2,
+                  px: { xs: 2, sm: 5, md: 0 },
+                  width: '100%'
+                }}>
+                  <Button sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(125, 125, 125, 0.5)"}} size="small" variant="contained"> Watch Later </Button>
+                  <Button sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} size="small" variant="contained"> Add to Whitelist </Button>
+                  <Button sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} size="small" variant="contained"> Share </Button>
+                
+              </Stack>
             </Grid>
-            <Grid item xs={12} md={8} lg={7} border='0px solid white'>
+            <Grid item xs={12} md={8} lg={6.5} py={{ xs: 5, md: 0 }} border='0px solid white'>
               <Box>
                 <Typography mb={1} variant="h6" sx={{fontSize: '1.25rem', fontWeight: 'bold', textAlign: 'start'}}>
                   { movie?.title || movie?.name }
@@ -166,8 +196,8 @@ const MovieDetails = () => {
               }}>
                 Ytebtu Moges  | 3.3 Million Views  | 3hr 6 min | Drama/Horror | 2024
               </Box>
-              <Grid container >
-                <Grid item xs={6} py={3}>
+              <Grid container py={3}>
+                <Grid item xs={12} md={6} >
                   <Typography variant="h6">
                     Details
                   </Typography>
@@ -189,15 +219,62 @@ const MovieDetails = () => {
                     </ListItem>
                   </List>
                 </Grid>
-                <Grid item xs={6} py={3}>
+                <Grid item xs={12} md={6}>
                   <Typography variant="h6">
                     Details
                   </Typography>
+                  <List sx={{fontSize: ".9em"}} >
+                    <ListItem>
+                      Director: Ma Niggga
+                    </ListItem>
+                    <ListItem>
+                      Language: English
+                    </ListItem>
+                    <ListItem>
+                      Release Date: March, 20/2024
+                    </ListItem>
+                    <ListItem>
+                      Rating: 3/5
+                    </ListItem>
+                    <ListItem>
+                       Country: USA
+                    </ListItem>
+                  </List>
                 </Grid>
               </Grid>
+              <Grid item sx={{ borderTop: '1px solid white'}} my={2}>
+                <Typography variant="h6" py={2}>
+                  Storyline
+                </Typography>
+                <Typography variant="body1" sx={{fontSize: '.9em'}}>
+                  { movie?.overview }
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={12} lg={2.5} border='0px solid white'>
-              Red
+            <Grid item xs={12} md={12} lg={3} border='0px solid white'>
+              <Box mb={2}>
+                <Typography variant="h6">
+                  Trailers
+                </Typography>
+              </Box>
+              <Box sx={{ 
+                  width: { lg: '100%', md: '480px', sm: '480px', xs: '480px' }, 
+                  height: { lg: 'fit-content', md: '270px', sm: '270px', xs: '270px' }, 
+                  position: 'relative', mx: 'auto' }}>
+                <iframe src={`https://www.youtube.com/embed/${videos?.key}`} frameBorder="0" 
+                  style={{
+                    // position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    // borderInline: '3px solid red',
+                    borderRadius: '16px',
+                    backgroundColor: '#d32f2f'
+                  }} 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                />
+              </Box>
             </Grid>
           </Grid>
           
