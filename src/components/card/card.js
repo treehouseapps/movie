@@ -26,7 +26,7 @@ const MovieList = ({ data, title }) => {
               alt={''}
               style={{
                 width: '241px',
-                height: '362px',
+                // height: '362px',
                 // backgroundColor: item.src ? '' : 'lightgray' 
               }}
             />

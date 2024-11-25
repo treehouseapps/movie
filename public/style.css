@@ -312,7 +312,7 @@ p {
   }
 
   .content {
-    padding-inline: 1rem;
+/*    padding-inline: 1rem;*/
   }
 
   .content h2 {
@@ -324,34 +324,47 @@ p {
   }
 
   .movies-list-container {
-    padding-inline: 1rem;
+/*    padding-inline: 1rem;*/
 
   }
 
   .movies-list {
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr;
+/*    gap: 1rem;*/
+/*    grid-template-columns: 1fr 1fr;*/
   }
 
   .movie {
-    width: 10rem;
+/*    width: 10rem;*/
   }
 
   .movie img {
-    height: 15rem;
+/*    height: 15rem;*/
   }
 }
 
 
-@media (max-width: 640px) {
+@media (max-width: 450px) {
   .movies-list-container {
     /* padding-inline: 1rem; */
   }
 
   .movies-list {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     /* grid-template-columns: 1fr 1fr; */
     /* gap: 1rem; */
   }
+  .movie img{
+    height: 16rem;
+  }
+}
+@media (max-width: 400px) {
+
+}
+@media (max-width: 370px) {
+  .movie img{
+    height: 20rem;
+  }
+
 }
 
 .loading,
