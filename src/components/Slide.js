@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
 
-const Slider = ({data}) => {
+const Slider = ({ data }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -16,17 +17,28 @@ const Slider = ({data}) => {
       <div
         className="slides"
         style={{
-          transform: `translateX(-${currentSlide * 100}%)`
+          transform: `translateX(-${currentSlide * 100}%)`,
         }}
       >
         {data.map((slide, index) => (
           <div key={index} className="slide">
-            <img src={`https://image.tmdb.org/t/p/w500/${slide.backdrop_path}`} alt={slide.title} className="background-image" />
+            <img
+              src={`https://image.tmdb.org/t/p/w1280/${slide.backdrop_path}`}
+              alt={slide.title}
+              className="background-image"
+            />
             <div className="overlay"></div>
             <div className="content">
               <h2>{slide.title}</h2>
               <p>{slide.overview}</p>
-              <button className="watch-now-btn">Watch Now</button>
+              <Button
+                variant="contained"
+                color="error"
+                className="mt-2"
+                onClick={() => alert("Watching")}
+              >
+                Watch Now
+              </Button>
             </div>
           </div>
         ))}
@@ -35,7 +47,7 @@ const Slider = ({data}) => {
         {data.map((_, index) => (
           <span
             key={index}
-            className={`dot ${index === currentSlide ? 'active' : ''}`}
+            className={`dot ${index === currentSlide ? "active" : ""}`}
             onClick={() => setCurrentSlide(index)}
           ></span>
         ))}
