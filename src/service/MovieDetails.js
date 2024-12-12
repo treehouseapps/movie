@@ -20,23 +20,19 @@ import { useParams } from 'react-router-dom'
 import api from '../api/axios'
 import { useQuery } from '@tanstack/react-query'
 import LoadingSpin from '../components/ui/loadingSpin'
+
 const theme = createTheme({
   typography: {
-    subtitle2: {
-      fontFamily: 'inherit'
-    },
+    fontFamily: 'Quicksand',
     h5: {
       color: '#fff',
-      fontFamily: 'inherit',
       fontWeight: 'bold'
     },
     h6: {
       color: '#fff',
-      fontFamily: 'inherit',
       fontWeight: 'bolder'
     },
     body1: {
-      fontFamily: 'inherit',
       color: '#fff'
     }
   },
@@ -86,10 +82,20 @@ const MovieDetails = () => {
     setOpen(!open)
   }
   
-  const fetchMovieData = async() => {
-    const response = await api.get(`/movie/${id}`)
-    console.log(response.data)
-    return response.data
+  const fetchMovieData = async () => {
+    const response = await api.get(`/movie/${id}`)    
+    const cacheData = localStorage.getItem(id)
+    if(response) {
+      localStorage.setItem(id, response.data)
+      console.log("using fresh data...")
+      console.log(response.data)
+      return response.data
+    } 
+
+    console.log("using cache data...")
+    const parsedCacheData = JSON.parse(cacheData)
+    return parsedCacheData
+
   }
 
   const fetchTrailerLink = async () => {
@@ -100,7 +106,7 @@ const MovieDetails = () => {
   const { data: movie, isPending, error } = useQuery({
     queryKey: ["movie"],
     queryFn: fetchMovieData,
-    refetchInterval: 1000 * 60
+    // refetchInterval: 1000 * 60
   })
 
   const { data: videos } = useQuery({
@@ -163,7 +169,7 @@ const MovieDetails = () => {
         </Grid>
         <Grid item lg={9} md={10} xs={11} px={0} sx={{ overflow: 'clip', mx: 'auto', width: '100%', zIndex: '22', border: '0px solid white', mt: '-25vh' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 3, pb: 5}} >
-            <Typography variant='h5'> {movie?.title} ({movie.release_date.split('-')[0]})</Typography> 
+            <Typography variant='h5'> {movie?.title} ({movie?.release_date.split('-')[0]})</Typography> 
             <Box sx={{
               display: 'flex',
               gap: 2,
@@ -177,7 +183,7 @@ const MovieDetails = () => {
           <Grid container color="white" columnSpacing={5} sx={{borderBlock: '1px solid white', py: 5 }}>
             <Grid item xs={12} md={4} lg={2.5} p={0} m={0} border='0px solid white' sx={{
               display: 'flex',
-              justifyContent: { xs: 'start', md: 'start' },
+              justifyContent: { xs: 'center', md: 'start' },
               alignItems: { xs: 'center', md: 'start' },
               flexDirection: { xs: 'row', md: 'column' },
               gap: { xs: 2, sm: 5, md: 0}
@@ -186,7 +192,7 @@ const MovieDetails = () => {
                 component="img"
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                 sx={{
-                  width: '100%',
+                  maxWidth: { xs: '8rem', md: '100%' },
                   borderRadius: 1
                 }}
               />
@@ -196,7 +202,7 @@ const MovieDetails = () => {
                 sx={{
                   py: 2,
                   px: { xs: 2, sm: 5, md: 0 },
-                  width: '100%'
+                  width: { xs: 'fit-content', md: '100%' }
                 }}>
                   <Button startIcon={<WatchLaterIcon />} sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(125, 125, 125, 0.5)"}} size="small" variant="contained"> Watch Later </Button>
                   <Button 
@@ -318,9 +324,9 @@ const MovieDetails = () => {
                 Similar Movies
               </Typography>
             </Box>
-            <Grid container sx={{ py: 4, gap: '16px 0', justifyContent: 'space-between'}}>
+            <Grid container columnSpacing={2} sx={{ py: 4, gap: '16px 0', justifyContent: 'space-between'}}>
               { arr.map(a => (
-                <Grid lg={2.2}>
+                <Grid item lg={2.2} md={4} xs={6} key={a}>
                   <Box 
                     component="img"
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
