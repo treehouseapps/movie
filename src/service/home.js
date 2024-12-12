@@ -17,27 +17,47 @@ const Home = () => {
   const url = "/discover/movie";
 
   const fetchMovies = async (url, page = {}) => {
-    const moviesResponse = await api.get("/discover/movie", {
-      params: { page },
-    });
-    const tvResponse = await api.get("/trending/tv/week", { params: { page } });
 
-    const movies = moviesResponse.data.results.slice(0, 10);
-    const tv = tvResponse.data.results;
-    console.log(movies);
+    const cachedData = localStorage.getItem("home")
+    try {
 
-    return { movies, tv };
-    console.log(movies);
-    
-  };
+      console.log("Searching...")
+      const moviesResponse = await api.get("/discover/movie", { params: { page } })
+      const tvResponse = await api.get("/trending/tv/week", { params: { page } })
+      console.log("More Searching...")
+
+      if(moviesResponse && tvResponse) {
+        console.log("using fresh data...")
+        const movies = moviesResponse.data.results.slice(0, 10)
+        const tv = tvResponse.data.results
+        localStorage.setItem("home", JSON.stringify({ movies, tv }))
+        return { movies, tv }
+      }
+
+      console.log("using cache data...")
+      const parsedCacheData = JSON.parse(cachedData)
+      console.log(parsedCacheData)
+      return { movies: parsedCacheData.movies, tv: parsedCacheData.tv }
+    } catch(err) {
+      if(cachedData) {
+        console.log("using cache data...")
+        const parsedCacheData = JSON.parse(cachedData)
+        console.log(parsedCacheData)
+        return { movies: parsedCacheData.movies, tv: parsedCacheData.tv }
+      }
+      console.log(err)
+      return { error: "Error"}
+    }
+  }
 
   
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["movies"],
-    queryFn: () => fetchMovies(url),
-    refetchInterval: 90000,
-  });
+
+      queryKey: ["movies"] || ['sda'], 
+      queryFn: () => fetchMovies(url),
+      // refetchInterval: 90000
+    })
 
   return (
     <div className="container-fluid body-container">
