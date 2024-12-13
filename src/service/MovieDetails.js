@@ -64,6 +64,8 @@ const schema = yup.object({
   email: yup.string().email("That's not email").required("Email required brr")
 })
 
+
+
 const MovieDetails = () => {
   const { id } = useParams()
   console.log(id)
@@ -111,7 +113,9 @@ const MovieDetails = () => {
     queryKey: ["videos"],
     queryFn: fetchTrailerLink
   })
-
+  const handlePlay = () => {
+    window.location.href = "https://vidlink.pro/movie/"+ id;
+  };
 
 
   if(isPending) {
@@ -157,7 +161,7 @@ const MovieDetails = () => {
                 width: 'fit-content',
                 height: 'fit-content'
               }} >
-                <IconButton>
+                <IconButton  onClick={() => handlePlay()}>
                   <PlayArrow sx={{ color: '#d32f2f', bgcolor: 'white', opacity: .75, border: '0px solid white', borderRadius: '50%', height: '75px', width: '75px', p: 1}}/>
                 </IconButton>
               </Box>
