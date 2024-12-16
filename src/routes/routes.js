@@ -4,6 +4,7 @@ import Home from "../service/home"
 import Footer from "../components/footer"
 import Movies from "../service/movies";
 import MovieDetails from "../service/MovieDetails";
+import TvDetails from "../service/TvDetails";
 import { CssBaseline } from '@mui/material'
 import Navbar from '../components/navbar'
 const PageRoutes = () => {
@@ -18,6 +19,7 @@ const PageRoutes = () => {
                     <Route path={Endpoints.home} element={<Home />} />
                     <Route path={Endpoints.movies} element={<Movies />} />
                     <Route path={Endpoints.movie} element={<MovieDetails />} />
+                    <Route path={Endpoints.tv} element={<TvDetails />} />
                 </Routes>
                 
 

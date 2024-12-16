@@ -20,6 +20,7 @@ const Slider = ({ data }) => {
           transform: `translateX(-${currentSlide * 100}%)`,
         }}
       >
+
         {data.map((slide, index) => (
           <div key={index} className="slide">
             <img
@@ -29,6 +30,11 @@ const Slider = ({ data }) => {
             />
             <div className="overlay"></div>
             <div className="content">
+            <div className="wow">
+              <img src={`https://image.tmdb.org/t/p/w1280/${slide.poster_path}`} alt="Poster"/>
+              <img src={`https://image.tmdb.org/t/p/w1280/${slide.poster_path}`} alt="Poster"/>
+              <img src={`https://image.tmdb.org/t/p/w1280/${slide.poster_path}`} alt="Poster"/>
+            </div>
               <h2>{slide.title}</h2>
               <p>{slide.overview}</p>
               <Button
