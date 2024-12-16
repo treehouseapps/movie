@@ -392,20 +392,38 @@ p {
   bottom: 0;
   top: 105;
 }
-
+@keyframes ho {
+  0%, 100%{
+    padding: 10px;
+  }, 
+  50% {
+    padding: 0;
+  }
+}
 .wow img {
   border: 2px solid white;
   width: 200px;
-/*  height:150px;*/
   object-fit: cover;
   border-radius: 50%;
   transition: .2s;
+  animation: ho 2s ease linear;
+/*  height: 0;*/
 }
 .wow img:hover{
-  width: 210px;
+  width: 205px;
   cursor: pointer;
-  z-index: 98;
 }
+
+.wow img:nth-child(1):active{
+  position: absolute;
+  transform: translateX(-250px) rotate(0deg);
+  z-index: 907080969756;
+} 
+.wow img:nth-child(2):active{
+/*  position: absolute;*/
+  transform: translateX(-250px) rotate(0deg);
+  z-index: 907080969756;
+} 
 .wow img:nth-child(1) {
   transform: translateX(250px) rotate(30deg);
 

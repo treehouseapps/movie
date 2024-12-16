@@ -68,13 +68,6 @@ const Home = () => {
           <div className="header">
             <Slide data={data.movies?.slice(0, 3)} />
           </div>
-<<<<<<< HEAD
-          <Card data={data.movies} type="movie" title="Popular Movies" />
-          <Card data={data.tv} type="tv" title="Trending TV Shows" />
-        </div>
-      </div>
-      </> }
-=======
 
           <div className="container-fluid contents-container">
             <div className="recommended">
@@ -89,7 +82,6 @@ const Home = () => {
           </div>
         </>
       )}
->>>>>>> origin/main
     </div>
   );
 };
