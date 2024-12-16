@@ -25,7 +25,7 @@ const Home = () => {
       const moviesResponse = await api.get("/discover/movie", { params: { page } })
       const tvResponse = await api.get("/trending/tv/week", { params: { page } })
       console.log("More Searching...")
-
+      console.log(tvResponse)
       if(moviesResponse && tvResponse) {
         console.log("using fresh data...")
         const movies = moviesResponse.data.results.slice(0, 10)
@@ -69,18 +69,9 @@ const Home = () => {
             <Slide data={data.movies?.slice(0, 3)} />
           </div>
 
-          <div className="container-fluid contents-container">
-            <div className="recommended">
-              <div className="catagory">
-                <p>Trending</p>
-                <button className="btn btn-primary">Movies</button>
-                <button className="btn btn-outline-primary">TV Shows</button>
-              </div>
-              <Card data={data.movies} title="Popular Movies" />
-              <Card data={data.tv} title="Trending TV Shows" />
-            </div>
-          </div>
-        </>
+          <Card data={data.movies} type="movie" title="Popular Movies" />
+          <Card data={data.tv} type="tv" title="Trending TV Shows" />
+      </> 
       )}
     </div>
   );

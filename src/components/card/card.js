@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getPrimaryGenres } from "../../utils/genreUtils";
 import getGenres from "../../api/getGenres";
 
-const MovieList = ({ data, title }) => {
+const MovieList = ({ data, type, title }) => {
   const [allGenres, setAllGenres] = useState([]);
 
   useEffect(() => {
@@ -13,13 +13,13 @@ const MovieList = ({ data, title }) => {
     };
     fetchGenres();
   }, []);
-
+  console.log(`data`, data)
   return (
     <div className="movies-list-container">
       <h1 className="section-title"> { title } </h1>
       <div className="movies-list">
         {data?.map((item) => (
-          <a href={`/movie/${item.id}`} className="movie" key={item.id}>
+          <a href={`/${type}/${item.id}`} className="movie" key={item.id}>
             <img
               className={`img-fluid ${ item.src ? "" :"backgroundAnimation" }`}
               src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}

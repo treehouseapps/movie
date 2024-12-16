@@ -41,8 +41,10 @@ a {
 }
 
 .theme-color {
-  color: rgb(255, 191, 0);
-  color: #d32f2f
+  color: #d32f2f!important;
+/*  background-color: #fff;
+  padding: 0rem .5rem;
+  border-radius: 5px;*/
 }
 
 .search {
@@ -219,9 +221,14 @@ a {
 
 .content h2 {
   font-size: 2.618rem;
+  font-weight: bold;
+
 }
 
-.content p {}
+.content p {
+  width: 50%;
+  margin-block: 1rem .5rem; 
+}
 
 .background-image {
   position: absolute;
@@ -377,4 +384,65 @@ p {
 
 .error {
   color: red;
+}
+
+.wow {
+  position: absolute;
+  right: -10%;
+  bottom: 0;
+  top: 105;
+}
+@keyframes ho {
+  0%, 100%{
+    padding: 10px;
+  }, 
+  50% {
+    padding: 0;
+  }
+}
+.wow img {
+  border: 2px solid white;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: .2s;
+  animation: ho 2s ease linear;
+/*  height: 0;*/
+}
+.wow img:hover{
+  width: 205px;
+  cursor: pointer;
+}
+
+.wow img:nth-child(1):active{
+  position: absolute;
+  transform: translateX(-250px) rotate(0deg);
+  z-index: 907080969756;
+} 
+.wow img:nth-child(2):active{
+/*  position: absolute;*/
+  transform: translateX(-250px) rotate(0deg);
+  z-index: 907080969756;
+} 
+.wow img:nth-child(1) {
+  transform: translateX(250px) rotate(30deg);
+
+}
+.wow img:nth-child(2) {
+  transform: translateX(0px);
+/*  transform: translateZ(10px);*/
+}
+.wow img:nth-child(3) {
+  transform: translateX(-250px) rotate(-30deg);
+/*  transform: translateX(-300px) rotateZ(-35deg);*/
+}
+
+@media (max-width: 950px) {
+  .wow {
+    display: none;
+  }
+  .content p{
+    width: 100%;
+  } 
+
 }

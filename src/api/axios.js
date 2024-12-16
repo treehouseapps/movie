@@ -6,7 +6,7 @@ const api = axios.create({
 	"Content-Type": "application/json",
 	"params": {
 		"api_key": "777a620fe0481ab7da037455f07f283b",
-		"page": "2"
+		"page": "1"
 	},
 	"timeout":  10000 
 	

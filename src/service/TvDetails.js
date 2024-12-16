@@ -56,13 +56,13 @@ const theme = createTheme({
   }
 })
 
+const arr = [1,2,3,4,5]
+
 // validation Schema 
 const schema = yup.object({
   name: yup.string().required("Name is required bruuuh"),
   email: yup.string().email("That's not email").required("Email required brr")
 })
-
-
 
 const MovieDetails = () => {
   const { id } = useParams()
@@ -81,8 +81,8 @@ const MovieDetails = () => {
   }
   
   const fetchMovieData = async () => {
-    const response = await api.get(`/movie/${id}`)    
-    const similarMovies = await api.get(`/movie/${id}/recommendations`, { params: { page: 1 } })    
+    const response = await api.get(`/tv/${id}`)    
+    const similarMovies = await api.get(`/tv/${id}/recommendations`, { params: { page: 1 } })    
       console.log(response)
     
     const cacheData = localStorage.getItem(id)
@@ -115,9 +115,7 @@ const MovieDetails = () => {
     queryKey: ["videos"],
     queryFn: fetchTrailerLink
   })
-  const handlePlay = () => {
-    window.location.href = "https://vidlink.pro/movie/"+ id;
-  };
+
 
 
   if(isLoading) {
@@ -135,14 +133,12 @@ const MovieDetails = () => {
       </div>
       )
   }
-  // console.log(movie)
   const backgroundImageUrl = movie?.backdrop_path ? `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}` : null;
 
   return (
     <>
     <ThemeProvider theme={theme}>
       <Grid container spacing={0} bgcolor="black"
-       //body container, it holds background image and details page as a grid
       >
         <Grid px={0} item xs={12}>
           <Box bgcolor="primary.dark" p={2} sx={{ 
@@ -174,20 +170,15 @@ const MovieDetails = () => {
                 width: 'fit-content',
                 height: 'fit-content'
               }} >
-                <IconButton  onClick={() => handlePlay()}>
+                <IconButton>
                   <PlayArrow sx={{ color: '#d32f2f', bgcolor: 'white', opacity: .75, border: '0px solid white', borderRadius: '50%', height: '75px', width: '75px', p: 1}}/>
                 </IconButton>
               </Box>
           </Box>
         </Grid>
-
         <Grid item lg={9} md={10} xs={11} px={0} sx={{ overflow: 'clip', mx: 'auto', width: '100%', zIndex: '22', border: '0px solid white', mt: '-25vh' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 3, pb: 5}} >
-            <Typography 
-              // movie name with released date, the released date comes with 2024-01-01 format, then split 2024
-              variant='h5'> 
-              {movie.title} ({movie.release_date?.split('-')[0] })
-            </Typography> 
+            <Typography variant='h5'> {movie.title || movie.name} ({movie.release_date?.split('-')[0] || movie?.last_air_date.split('-')[0]})</Typography> 
             <Box sx={{
               display: 'flex',
               gap: 2,
@@ -198,17 +189,14 @@ const MovieDetails = () => {
               <Button size="small" variant="outlined" sx={{border: '1px solid white', color: '#fff'}}> Watch Later </Button>
             </Box>
           </Box>
-          <Grid container color="white" columnSpacing={5} sx={{ borderBlock: '1px solid white', py: 5 }}>
-            <Grid item xs={12} md={4} lg={2.5} p={0} m={0} border='0px solid white' 
-              // movie details alignment for mobile and desktops, xs for mobiles and md is above that
-              sx={{
-                display: 'flex',
-                justifyContent: { xs: 'center', md: 'start' },
-                alignItems: { xs: 'center', md: 'start' },
-                flexDirection: { xs: 'row', md: 'column' },
-                gap: { xs: 2, sm: 5, md: 0},
-                flexWrap: 'wrap'
-              }}>
+          <Grid container color="white" columnSpacing={5} sx={{borderBlock: '1px solid white', py: 5 }}>
+            <Grid item xs={12} md={4} lg={2.5} p={0} m={0} border='0px solid white' sx={{
+              display: 'flex',
+              justifyContent: { xs: 'center', md: 'start' },
+              alignItems: { xs: 'center', md: 'start' },
+              flexDirection: { xs: 'row', md: 'column' },
+              gap: { xs: 2, sm: 5, md: 0}
+            }}>
               <Box 
                 component="img"
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -219,13 +207,13 @@ const MovieDetails = () => {
               />
               <Stack 
                 direction="column"
-                spacing={1 }
+                spacing={1}
                 sx={{
                   py: 2,
                   px: { xs: 2, sm: 5, md: 0 },
                   width: { xs: 'fit-content', md: '100%' }
                 }}>
-                  <Button startIcon={<WatchLaterIcon />} sx={{ textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(125, 125, 125, 0.5)" }} size="small" variant="contained"> Watch Later </Button>
+                  <Button startIcon={<WatchLaterIcon />} sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(125, 125, 125, 0.5)"}} size="small" variant="contained"> Watch Later </Button>
                   <Button 
                     size="small" 
                     variant="contained" 
@@ -233,7 +221,7 @@ const MovieDetails = () => {
                     sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} 
                   > 
                       Add to Whitelist 
-                  </Button>
+                    </Button>
                   <Button 
                     sx={{textTransform: 'capitalize', fontFamily: 'inherit', bgcolor: "rgba(25, 25, 25, 1)"}} 
                     size="small"
@@ -359,13 +347,79 @@ const MovieDetails = () => {
                     }}
                   />
                   <Typography variant="body1" sx={{ fontWeight: 'bold', my: 1}}>
-                    { movie?.title }
+                    { movie?.name }
                   </Typography>
                   <Typography variant="subtitle2" sx={{ color: '#fff'}}>
                     Horror | Action
                   </Typography>
                 </Grid>
                 ))}
+              {/*<Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+                <Typography variant="body1" sx={{ fontWeight: 'bold', my: 1,}}>
+                  { movie?.title }
+                </Typography>
+                <Typography variant="subtitle2" sx={{ color: '#fff'}}>
+                  Horror/Action
+                </Typography>
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>
+              <Grid lg={2.2}>
+                <Box 
+                  component="img"
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  sx={{
+                    width: '100%',
+                    borderRadius: 1,
+                    height: '250px',
+                    objectFit: 'cover'
+                  }}
+                />
+              </Grid>*/}
             </Grid>
             <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center'}}>
               <Button variant="contained" sx={{ fontFamily: 'inherit', width: 'fit-content', bgcolor: 'rgb(25, 25, 25)'}}>
@@ -378,8 +432,6 @@ const MovieDetails = () => {
           { isLoading && <LoadingSpin /> }
           
         </Grid>
-
-        {/*never mind everything below this*/}
         <Grid item xs={4} sx={{display: 'none'}}>
           <Box border="1px solid" borderRadius={1} p={2} mb={2}>
             <form onSubmit={handleSubmit(onSubmitt)}>
