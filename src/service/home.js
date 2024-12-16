@@ -69,18 +69,9 @@ const Home = () => {
             <Slide data={data.movies?.slice(0, 3)} />
           </div>
 
-          <div className="container-fluid contents-container">
-            <div className="recommended">
-              <div className="catagory">
-                <p>Trending</p>
-                <button className="btn btn-primary">Movies</button>
-                <button className="btn btn-outline-primary">TV Shows</button>
-              </div>
-              <Card data={data.movies} title="Popular Movies" />
-              <Card data={data.tv} title="Trending TV Shows" />
-            </div>
-          </div>
-        </>
+          <Card data={data.movies} type="movie" title="Popular Movies" />
+          <Card data={data.tv} type="tv" title="Trending TV Shows" />
+      </> 
       )}
     </div>
   );
