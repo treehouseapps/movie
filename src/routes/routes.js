@@ -10,8 +10,7 @@ const PageRoutes = () => {
   return (
     <>
       <CssBaseline />
-      <Navbar
-       
+      <Navbar 
       />
       <Router>
         <div>
