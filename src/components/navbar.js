@@ -13,7 +13,7 @@ import { Movie, Tv, Theaters } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import axios from "axios";
-
+import Link from '@mui/material/Link';
 const themes = createTheme({
   typography: {
     fontFamily: "inherit",
@@ -25,7 +25,7 @@ const themes = createTheme({
     },
   },
 });
-
+ 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -56,7 +56,7 @@ const FloatingButton = styled(IconButton)(({ theme }) => ({
   border: "1px solid #fff",
 }));
 const api = axios.create({
-  baseURL: "https://imdb.iamidiotareyoutoo.com/search?q=",
+  baseURL: "https://imdb.iamidiotareyoutoo.com/justwatch?q=",
 });
 
 const Navbar = () => {
@@ -96,6 +96,9 @@ const Navbar = () => {
     }
   }, [inputValue]);
 
+  const movieOrShow = records.map(types => types.type)
+
+  
   return (
     <ThemeProvider theme={themes}>
       <CssBaseline />
@@ -131,7 +134,9 @@ const Navbar = () => {
               color="white"
               sx={{ fontWeight: "bolder" }}
             >
+            <Link href= "/" underline="none"  color="inherit">
               Random <span className="theme-color"> Movies </span>
+              </Link>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -164,8 +169,8 @@ const Navbar = () => {
                      style={{listStyleType: "none"}}
                         key={index}
                       >
-                        <li className="search-title"><a href={`/movie/${list["#IMDB_ID"]}`}>{list["#TITLE"]}</a></li>
-                        <li className="search-dis"><a href={`/movie/${list["#IMDB_ID"]}`}>{list["#YEAR"]}</a></li>
+                        <li className="search-title"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["title"]}</a></li>
+                        <li className="search-dis"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["year"]}</a></li>
                       </ol>
                     ))}
                 </div>
