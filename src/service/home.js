@@ -11,6 +11,8 @@ import LoadingSpin from "../components/ui/loadingSpin";
 
 import api from "../api/axios";
 import useFetch from "../hooks/useFetch";
+import Footer from "../components/footer";
+
 
 const Home = () => {
   // const url = "https://api.themoviedb.org/3/discover/movie?api_key=777a620fe0481ab7da037455f07f283b";
@@ -26,7 +28,7 @@ const Home = () => {
       const tvResponse = await api.get("/trending/tv/week", { params: { page } })
       console.log("More Searching...")
       console.log(tvResponse)
-      if(moviesResponse && tvResponse) {
+      if (moviesResponse && tvResponse) {
         console.log("using fresh data...")
         const movies = moviesResponse.data.results.slice(0, 10)
         const tv = tvResponse.data.results
@@ -38,26 +40,26 @@ const Home = () => {
       const parsedCacheData = JSON.parse(cachedData)
       console.log(parsedCacheData)
       return { movies: parsedCacheData.movies, tv: parsedCacheData.tv }
-    } catch(err) {
-      if(cachedData) {
+    } catch (err) {
+      if (cachedData) {
         console.log("using cache data...")
         const parsedCacheData = JSON.parse(cachedData)
         console.log(parsedCacheData)
         return { movies: parsedCacheData.movies, tv: parsedCacheData.tv }
       }
       console.log(err)
-      return { error: "Error"}
+      return { error: "Error" }
     }
   }
 
-  
+
 
   const { data, isLoading, error } = useQuery({
 
-      queryKey: ["movies"] || ['sda'], 
-      queryFn: () => fetchMovies(url),
-      // refetchInterval: 90000
-    })
+    queryKey: ["movies"] || ['sda'],
+    queryFn: () => fetchMovies(url),
+    // refetchInterval: 90000
+  })
 
   return (
     <div className="container-fluid body-container">
@@ -71,7 +73,8 @@ const Home = () => {
 
           <Card data={data.movies} type="movie" title="Popular Movies" />
           <Card data={data.tv} type="tv" title="Trending TV Shows" />
-      </> 
+          <Footer />
+        </>
       )}
     </div>
   );
