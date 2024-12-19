@@ -166,11 +166,11 @@ const Navbar = () => {
                   {records.length > 0 &&
                     records.map((list, index) => (
                       <ol
-                     style={{listStyleType: "none"}}
+                     style={{listStyleType: "none", fontSize: ".9rem",margin: "8px",boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"}}
                         key={index}
                       >
                         <li className="search-title"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["title"]}</a></li>
-                        <li className="search-dis"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["year"]}</a></li>
+                        <li className="search-dis"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["type"]} | {list["year"]}</a></li>
                       </ol>
                     ))}
                 </div>

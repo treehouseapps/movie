@@ -4,7 +4,6 @@ import AddIcon from "@mui/icons-material/Add";
 import {
   Button,
   Typography,
-  Grid,
   Box,
   createTheme,
   ThemeProvider,
@@ -16,14 +15,15 @@ import {
   List,
   ListItem,
   ListItemtext,
+  Hidden,
 } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import MenuIcon from "@mui/material/Menu";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import ShareIcon from "@mui/icons-material/Share";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -115,7 +115,6 @@ const MovieDetails = () => {
       return data;
     }
 
-   
     const parsedCacheData = JSON.parse(cacheData);
     return parsedCacheData;
   };
@@ -140,31 +139,26 @@ const MovieDetails = () => {
     queryFn: fetchTrailerLink,
   });
 
-
   const backgroundImageUrl = movie?.backdrop_path
-  ? `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`
-  : null;
-  const [changeEpisodes , letChangeEpisodes] = useState("/"+ 1 + "/" + 1);
+    ? `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`
+    : null;
+  const [changeEpisodes, letChangeEpisodes] = useState("/" + 1 + "/" + 1);
 
   const [hideBackground, setHideBackground] = useState({
     iframe1: { visibility: "hidden" },
     grid1: { marginTop: "-25vh" },
     iconButton1: { inset: "0", position: "absolute" },
-    
-    
   });
   const handlePlay = () => {
     setHideBackground({
       iframe1: { visibility: "visible", position: "Fixed", inset: "0" },
       grid1: { marginTop: "4vh", transition: "margin-top 1s" },
       iconButton1: { visibility: "hidden" },
-      }
-  );
+    });
   };
-  const handleButtonClick = ((seasonNumber, eachEpisode) =>{
-    letChangeEpisodes("/"+ seasonNumber + "/" + eachEpisode)
-    
-  })
+  const handleButtonClick = (seasonNumber, eachEpisode) => {
+    letChangeEpisodes("/" + seasonNumber + "/" + eachEpisode);
+  };
 
   console.log(movie);
   if (isLoading) {
@@ -185,7 +179,6 @@ const MovieDetails = () => {
       </div>
     );
   }
- 
 
   return (
     <>
@@ -226,10 +219,10 @@ const MovieDetails = () => {
                   height: "100%",
                 }}
               >
-                <IconButton  
+                <IconButton
                   onClick={() => handlePlay()}
                   style={hideBackground.iconButton1}
-                  >
+                >
                   <PlayArrow
                     sx={{
                       color: "#d32f2f",
@@ -245,7 +238,9 @@ const MovieDetails = () => {
                 </IconButton>
                 <iframe
                   style={hideBackground.iframe1}
-                  src={"https://vidsrc.to/embed/tv/" + movie.id + changeEpisodes}
+                  src={
+                    "https://vidsrc.to/embed/tv/" + movie.id + changeEpisodes
+                  }
                   allowFullScreen
                   height="100%"
                   width="100%"
@@ -266,7 +261,6 @@ const MovieDetails = () => {
               width: "100%",
               zIndex: "22",
               border: "0px solid white",
-              
             }}
           >
             <Box
@@ -401,29 +395,49 @@ const MovieDetails = () => {
                 border="0px solid white"
               >
                 <Box>
-                  <Typography variant="h6" >
-                  Episodes 
-                  </Typography>
-                    {movie["seasons"].map((season,index) => (
-
-                        <Stack direction="row" spacing={2} style={{listStyleType: "none" , justifyContent: "flex-start", flexWrap: "nowrap" }} key={index} >
-
-                          <ListItem style={{ display: "inline-flex" }}>
-                          <Button variant="contained">{ season.name != "Specials" ? season.season_number : null}</Button>
-
-                          {season.name !== "Specials" ? (Array.from({ length: season.episode_count }, (_, i) => (
-                            <Button key={i} variant="outlined" value={i+1} onClick={(e) => handleButtonClick(season.season_number,e.target.value)}>
-                              {i + 1}
+                  <Typography variant="h6">Episodes</Typography>
+                  {movie["seasons"].map(
+                    (season, index) =>
+                      season.name !== "Specials" && (
+                        <Grid
+                          container
+                          spacing={2}
+                          key={index}
+                          style={{ marginBottom: "16px" }}
+                        >
+                          <Grid item xs={12}>
+                            <Button
+                              variant="contained"
+                              sx={{ marginBottom: 1 }}
+                            >
+                              Season {season.season_number}
                             </Button>
-                          ))) : null}
+                          </Grid>
+
                           
-                            
-                          </ListItem>
-
-                        </Stack>
-
-                    ))}
-                 
+                          {Array.from(
+                            { length: season.episode_count },
+                            (_, i) => (
+                              <Grid item xs={6} sm={4} md={2} key={i}>
+                                <Button
+                                  variant="outlined"
+                                  sx={{ width: "100%" }}
+                                  value={i + 1}
+                                  onClick={(e) =>
+                                    handleButtonClick(
+                                      season.season_number,
+                                      e.target.value
+                                    )
+                                  }
+                                >
+                                  {i + 1}
+                                </Button>
+                              </Grid>
+                            )
+                          )}
+                        </Grid>
+                      )
+                  )}
                 </Box>
                 <Box
                   sx={{
@@ -432,8 +446,10 @@ const MovieDetails = () => {
                     fontSize: " .9em",
                   }}
                 >
-               {movie.genres.map((genres)=> <span>{genres.name} </span>)} | {movie.first_air_date.slice(0,4)}
-
+                  {movie.genres.map((genres) => (
+                    <span>{genres.name} </span>
+                  ))}{" "}
+                  | {movie.first_air_date.slice(0, 4)}
                 </Box>
                 <Grid container py={3}>
                   <Grid item xs={12} md={6}>
@@ -478,7 +494,8 @@ const MovieDetails = () => {
                     mx: "auto",
                   }}
                 >
-                  <iframe allowFullScreen
+                  <iframe
+                    allowFullScreen
                     src={`https://www.youtube.com/embed/${videos?.key}`}
                     frameBorder="0"
                     style={{
@@ -524,7 +541,7 @@ const MovieDetails = () => {
                       {movie?.name}
                     </Typography>
                     <Typography variant="subtitle2" sx={{ color: "#fff" }}>
-                    {movie.media_type}
+                      {movie.media_type}
                     </Typography>
                   </Grid>
                 ))}
