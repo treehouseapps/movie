@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
+import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -19,8 +19,8 @@ const Title = () => {
                 borderRadius: '30px'
             }}
         >
-            <Typography variant='h4' align='center' sx={{ margin: '1rem', borderRadius: '1rem', backgroundColor: 'whitesmoke' }}>
-                <p className="section-title"><Typography variant='h3'>Watch Movies, TV shows and more</Typography></p>
+            <Typography variant='h4' align='center' sx={{ margin: '.5rem', borderRadius: '1rem' }}>
+                <p className="section-title"><Typography variant='h5'>Watch Movies, TV shows and more</Typography></p>
             </Typography>
             <Grid container justifyContent="space-between">
                 <Grid item>
@@ -28,28 +28,64 @@ const Title = () => {
                         <DoubleArrowIcon />    Movies
                     </Typography>
                 </Grid>
-                <Grid item> <Paper
-                    component="form"
-                    sx={{
-                        p: '2px 4px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        boxShadow: '1px 1px 5px 1px gray',
-                        width: 400
-                    }}
-                >
-                    <InputBase
-                        sx={{ ml: 1, flex: 1 }}
-                        placeholder="Search Movies"
-                        inputProps={{ 'aria-label': 'Search Movies' }}
-                    />
-                    <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper></Grid>
+                <Grid item>
+                    <Paper
+                        component="form"
+                        sx={{
+                            p: '2px 4px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: 400,
+                            backgroundColor: 'transparent',
+                            boxShadow: 'none',
+                            border: 'none',
+                            marginRight: "2rem"
+                        }}
+                    >
+                        <TextField
+                            variant="outlined"
+                            placeholder="Search ..."
+                            fullWidth
+                            sx={{
+                                ml: 'auto',
+                                width: '50px',
+                                transition: 'width 0.3s ease-in-out',
+                                '& .MuiOutlinedInput-root': {
+                                    paddingRight: '40px',
+                                    '& fieldset': {
+                                        border: 'none',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        border: 'none',
+                                    },
+                                },
+                                '&:focus-within': {
+                                    width: '200px',
+                                    border: '1px solid black',
+                                    borderRadius: '1rem',
+                                },
+                            }}
+                            InputProps={{
+                                endAdornment: (
+                                    <IconButton
+                                        type="button"
+                                        sx={{ p: '10px', color: 'black', position: 'absolute', right: '10px' }} // Positioning icon
+                                        aria-label="search"
+                                        onClick={() => console.log('Search clicked!')}
+                                    >
+                                        <SearchIcon sx={{ color: 'black', fontSize: '30px' }} />
+                                    </IconButton>
+                                ),
+                            }}
+                        />
+                    </Paper>
 
-            </Grid>
-        </Box>
+
+
+                </Grid>
+
+            </Grid >
+        </Box >
     );
 };
 
