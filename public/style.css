@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 body {
-  position: 'relative'
-    background-color: #333;
+  position: 'relative';
+  background-color: #333;
   font-family: "Quicksand" !important;
 }
 
@@ -24,8 +24,6 @@ body {
   right: 0;
   z-index: 1;
   display: flex;
-  background-color: ;
-  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
@@ -44,9 +42,6 @@ a {
 
 .theme-color {
   color: #d32f2f !important;
-  /*  background-color: #fff;
-  padding: 0rem .5rem;
-  border-radius: 5px;*/
 }
 
 .search {
@@ -58,7 +53,6 @@ a {
 .search input {
   border: none;
   width: 25rem;
-  font-size: ;
   padding: 0 .5rem;
   height: 2rem;
   background-color: transparent;
@@ -145,10 +139,7 @@ a {
   display: grid;
   justify-items: center;
   gap: 1rem;
-  /*  gap: 2rem;*/
-
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-  background-color: ;
 }
 
 .movie {
@@ -156,7 +147,6 @@ a {
   color: #333;
   margin-bottom: 1rem;
   display: grid;
-  justify-items: ;
   align-items: space-between;
   gap: .5rem;
 
@@ -210,7 +200,6 @@ a {
   align-items: center;
   justify-content: start;
   color: #fff;
-  text-align: ;
 }
 
 .content {
@@ -328,10 +317,6 @@ p {
     height: 50vh;
   }
 
-  .content {
-    /*    padding-inline: 1rem;*/
-  }
-
   .content h2 {
     font-size: 2rem;
   }
@@ -339,36 +324,12 @@ p {
   .content p {
     font-size: .8rem;
   }
-
-  .movies-list-container {
-    /*    padding-inline: 1rem;*/
-
-  }
-
-  .movies-list {
-    /*    gap: 1rem;*/
-    /*    grid-template-columns: 1fr 1fr;*/
-  }
-
-  .movie {
-    /*    width: 10rem;*/
-  }
-
-  .movie img {
-    /*    height: 15rem;*/
-  }
 }
 
 
 @media (max-width: 450px) {
-  .movies-list-container {
-    /* padding-inline: 1rem; */
-  }
-
   .movies-list {
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-    /* grid-template-columns: 1fr 1fr; */
-    /* gap: 1rem; */
   }
 
   .movie img {
@@ -411,7 +372,6 @@ p {
     padding: 10px;
   }
 
-  ,
   50% {
     padding: 0;
   }
@@ -424,7 +384,6 @@ p {
   border-radius: 50%;
   transition: .2s;
   animation: ho 2s ease linear;
-  /*  height: 0;*/
 }
 
 .wow img:hover {
@@ -439,7 +398,6 @@ p {
 }
 
 .wow img:nth-child(2):active {
-  /*  position: absolute;*/
   transform: translateX(-250px) rotate(0deg);
   z-index: 907080969756;
 }
@@ -451,12 +409,10 @@ p {
 
 .wow img:nth-child(2) {
   transform: translateX(0px);
-  /*  transform: translateZ(10px);*/
 }
 
 .wow img:nth-child(3) {
   transform: translateX(-250px) rotate(-30deg);
-  /*  transform: translateX(-300px) rotateZ(-35deg);*/
 }
 
 @media (max-width: 950px) {
