@@ -4,7 +4,7 @@ import getGenres from "../../api/getGenres";
 import Header from '../ui/header'
 
 
-const MovieList = ({ data, type, title }) => {
+const MovieList = ({ data, type, head }) => {
     const [allGenres, setAllGenres] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const MovieList = ({ data, type, title }) => {
     }, []);
     return (
         <div className="movies-list-container">
-            {<Header />}
+            {<Header head={head} />}
             <div className="movies-list">
                 {data?.map((item) => (
                     <a href={`/${type}/${item.id}`} className="movie" key={item.id}>

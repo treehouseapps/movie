@@ -8,8 +8,8 @@ const api = axios.create({
 		"api_key": "777a620fe0481ab7da037455f07f283b",
 		"page": "1"
 	},
-	"timeout":  10000 
-	
+	"timeout": 10000
+
 })
 
 export default api

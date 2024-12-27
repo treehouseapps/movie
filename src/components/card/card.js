@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getPrimaryGenres } from "../../utils/genreUtils";
 import getGenres from "../../api/getGenres";
 
-const MovieList = ({ data, type, title }) => {
+const MovieList = ({ data, type, title, head }) => {
   const [allGenres, setAllGenres] = useState([]);
 
   useEffect(() => {
@@ -16,12 +16,12 @@ const MovieList = ({ data, type, title }) => {
   console.log(`data`, data)
   return (
     <div className="movies-list-container">
-      <h1 className="section-title"> { title } </h1>
+      <h1 className="section-title"> {title} </h1>
       <div className="movies-list">
         {data?.map((item) => (
           <a href={`/${type}/${item.id}`} className="movie" key={item.id}>
             <img
-              className={`img-fluid ${ item.src ? "" :"backgroundAnimation" }`}
+              className={`img-fluid ${item.src ? "" : "backgroundAnimation"}`}
               src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
               alt={''}
               style={{
@@ -31,7 +31,7 @@ const MovieList = ({ data, type, title }) => {
               }}
             />
             <div className="card-body">
-              <h6 className="card-title">{item.title || item.name }</h6>
+              <h6 className="card-title">{item.title || item.name}</h6>
               <div className="list">
                 <p className="card-text">
                   {getPrimaryGenres(item.genre_ids, allGenres)

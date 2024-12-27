@@ -25,7 +25,7 @@ const themes = createTheme({
     },
   },
 });
- 
+
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -98,7 +98,7 @@ const Navbar = () => {
 
   const movieOrShow = records.map(types => types.type)
 
-  
+
   return (
     <ThemeProvider theme={themes}>
       <CssBaseline />
@@ -134,8 +134,8 @@ const Navbar = () => {
               color="white"
               sx={{ fontWeight: "bolder" }}
             >
-            <Link href= "/" underline="none"  color="inherit">
-              Random <span className="theme-color"> Movies </span>
+              <Link href="/" underline="none" color="inherit">
+                Random <span className="theme-color"> Movies </span>
               </Link>
             </Typography>
           </Toolbar>
@@ -166,11 +166,11 @@ const Navbar = () => {
                   {records.length > 0 &&
                     records.map((list, index) => (
                       <ol
-                     style={{listStyleType: "none", fontSize: ".9rem",margin: "8px",boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"}}
+                        style={{ listStyleType: "none", fontSize: ".9rem", margin: "8px", boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px" }}
                         key={index}
                       >
-                        <li className="search-title"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["title"]}</a></li>
-                        <li className="search-dis"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}`:`/tv/${list['tmdbId']}`}>{list["type"]} | {list["year"]}</a></li>
+                        <li className="search-title"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}` : `/tv/${list['tmdbId']}`}>{list["title"]}</a></li>
+                        <li className="search-dis"><a href={list.type === "MOVIE" ? `/movie/${list['tmdbId']}` : `/tv/${list['tmdbId']}`}>{list["type"]} | {list["year"]}</a></li>
                       </ol>
                     ))}
                 </div>
@@ -180,7 +180,7 @@ const Navbar = () => {
               <Movie />
               <Typography variant="body1">Movies</Typography>
             </StyledListItem>
-            <StyledListItem component="a" href="/movies">
+            <StyledListItem component="a" href="/tvshows">
               <Tv />
               <Typography variant="body1">Tv Shows</Typography>
             </StyledListItem>

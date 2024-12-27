@@ -24,7 +24,7 @@ const Movies = () => {
     <div>
       {isLoading && <LoadingSpin data={isLoading} />}
       {data?.results?.length > 0 && (
-        <CardAllItem data={data.results} type="movie" />
+        <CardAllItem data={data.results} type="movie" head="Movies" />
       )}
       <Footer />
     </div>

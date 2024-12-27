@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
-const Title = () => {
+const Title = (props) => {
     return (
         <div className='header'>
             <div className="header-search">
@@ -87,7 +87,7 @@ const Title = () => {
                 <Grid container justifyContent="space-between">
                     <Grid item>
                         <Typography variant="h4" sx={{}}>
-                            <DoubleArrowIcon />    Movies
+                            <DoubleArrowIcon />    {props.head}
                         </Typography>
                     </Grid>
                     <Grid item>

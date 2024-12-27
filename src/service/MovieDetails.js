@@ -35,6 +35,7 @@ import { useParams } from "react-router-dom";
 import api from "../api/axios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpin from "../components/ui/loadingSpin";
+import Footer from "../components/footer";
 
 const theme = createTheme({
   typography: {
@@ -181,7 +182,7 @@ const MovieDetails = () => {
           container
           spacing={0}
           bgcolor="black"
-          //body container, it holds background image and details page as a grid
+        //body container, it holds background image and details page as a grid
         >
           <Grid px={0} item xs={12}>
             <Box
@@ -245,7 +246,6 @@ const MovieDetails = () => {
               </Box>
             </Box>
           </Grid>
-
           <Grid
             item
             lg={9}
@@ -416,7 +416,7 @@ const MovieDetails = () => {
                     fontSize: " .9em",
                   }}
                 >
-                  {movie.runtime} min | {movie.genres.map((genres)=> <span>{genres.name} </span>)} | {movie.release_date.slice(0,4)}
+                  {movie.runtime} min | {movie.genres.map((genres) => <span>{genres.name} </span>)} | {movie.release_date.slice(0, 4)}
                 </Box>
                 <Grid container py={3}>
                   <Grid item xs={12} md={6}>
@@ -524,6 +524,7 @@ const MovieDetails = () => {
                     fontFamily: "inherit",
                     width: "fit-content",
                     bgcolor: "rgb(25, 25, 25)",
+                    marginBottom: '1rem'
                   }}
                 >
                   Show More
@@ -569,6 +570,8 @@ const MovieDetails = () => {
           </Grid>
         </Grid>
       </ThemeProvider>
+      <Footer />
+
     </>
   );
 };
