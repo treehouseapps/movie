@@ -18,7 +18,12 @@ const Title = ({ head, pageType, onClick, selectedButton }) => {
         ];
 
     return (
-        <Box sx={{ margin: "0rem 5rem", marginTop: "1rem" }}>
+        <Box sx={{
+            margin: "0rem 2%", marginTop: "1rem",
+            '@media (max-width:600px)': {
+                marginTop: '3rem'
+            }
+        }}>
             <div className="header">
                 <div className="header-search">
                     <Paper
@@ -29,6 +34,13 @@ const Title = ({ head, pageType, onClick, selectedButton }) => {
                             justifyContent: 'flex-end',
                             width: 400,
                             boxShadow: 'none',
+                            '@media (max-width:600px)': {
+                                position: 'absolute',
+                                top: '3.5rem',
+                                left: '40%',
+                                width: 200,
+                                p: '0px 0px',
+                            },
                         }}
                     >
                         <TextField
@@ -48,6 +60,9 @@ const Title = ({ head, pageType, onClick, selectedButton }) => {
                                     border: '1px solid black',
                                     borderRadius: '1rem',
                                 },
+                                '@media (max-width:600px)': {
+                                    padding: '-10px',
+                                }
                             }}
                             InputProps={{
                                 endAdornment: (
@@ -58,6 +73,9 @@ const Title = ({ head, pageType, onClick, selectedButton }) => {
                                             color: 'black',
                                             position: 'absolute',
                                             right: '10px',
+                                            '@media (max-width:600px)': {
+                                                padding: '0px'
+                                            }
                                         }}
                                         aria-label="search"
                                     >
@@ -74,6 +92,7 @@ const Title = ({ head, pageType, onClick, selectedButton }) => {
                         margin: "0.5rem 1rem",
                         padding: "10px",
                         borderRadius: "30px",
+
                     }}
                 >
                     <Typography variant="h5" align="center"
@@ -81,34 +100,60 @@ const Title = ({ head, pageType, onClick, selectedButton }) => {
                             marginBottom: "1rem",
                             fontFamily: '"Noto Serif", serif',
                             fontWeight: 700,
+                            '@media (max-width:600px)': {
+                                fontSize: '1rem',
+                            },
                         }}
                     >
                         Watch Movies, TV shows, and more
                     </Typography><hr />
                     <Grid container justifyContent="space-between">
-                        <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-                            <Box variant="h5" sx={{ marginRight: '2rem' }} style={{ display: 'flex', alignItems: 'center' }}>
+                        <Grid item
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                '@media (max-width:600px)': {
+                                    display: 'block',
+                                },
+                            }}
+                        >
+                            <Box variant="h5" sx={{
+                                marginRight: '2rem',
+                                '@media (max-width:600px)': {
+                                    marginRight: '0.5rem'
+                                },
+                            }} style={{ display: 'flex', alignItems: 'center' }}>
                                 <DoubleArrowIcon />
                                 <Typography variant='h6' sx={{
                                     fontFamily: '"Noto Serif", serif',
                                     fontWeight: 700,
-                                    marginLeft: '1rem'
+                                    marginLeft: '1rem',
+                                    '@media (max-width:600px)': {
+                                        fontSize: '1rem'
+                                    },
                                 }}>{head}</Typography>
                             </Box>
-                            {buttonConfigs.map(({ key, label }) => (
-                                <Button
-                                    key={key}
-                                    variant={selectedButton === key ? "contained" : "outlined"}
-                                    size="small"
-                                    sx={{
-                                        marginLeft: "0.5rem",
-                                        fontSize: '0.75rem'
-                                    }}
-                                    onClick={() => onClick(key)}
-                                >
-                                    {label}
-                                </Button>
-                            ))}
+                            <Box style={{ display: 'flex', alignItems: 'center' }}
+                                sx={{
+                                    '@media (max-width:600px)': {
+                                        marginTop: '0.5rem'
+                                    },
+                                }}>
+                                {buttonConfigs.map(({ key, label }) => (
+                                    <Button
+                                        key={key}
+                                        variant={selectedButton === key ? "contained" : "outlined"}
+                                        size="small"
+                                        sx={{
+                                            marginLeft: "0.5rem",
+                                            fontSize: '0.75rem',
+                                        }}
+                                        onClick={() => onClick(key)}
+                                    >
+                                        {label}
+                                    </Button>
+                                ))}
+                            </Box>
                         </Grid>
                     </Grid>
                 </Box>
