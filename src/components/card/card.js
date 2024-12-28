@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getPrimaryGenres } from "../../utils/genreUtils";
 import getGenres from "../../api/getGenres";
 
-const MovieList = ({ data, type, title, head }) => {
+const MovieList = ({ data, type, title }) => {
   const [allGenres, setAllGenres] = useState([]);
 
   useEffect(() => {

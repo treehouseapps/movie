@@ -16,7 +16,6 @@ const MovieList = ({ data, type, head }) => {
     }, []);
     return (
         <div className="movies-list-container">
-            {<Header head={head} />}
             <div className="movies-list">
                 {data?.map((item) => (
                     <a href={`/${type}/${item.id}`} className="movie" key={item.id}>
