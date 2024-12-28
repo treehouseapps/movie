@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { getPrimaryGenres } from "../../utils/genreUtils";
 import getGenres from "../../api/getGenres";
-import Header from '../ui/header'
 
-
-const MovieList = ({ data, type, head }) => {
+const MovieList = ({ data, type }) => {
     const [allGenres, setAllGenres] = useState([]);
 
     useEffect(() => {
@@ -14,6 +12,7 @@ const MovieList = ({ data, type, head }) => {
         };
         fetchGenres();
     }, []);
+
     return (
         <div className="movies-list-container">
             <div className="movies-list">
@@ -22,12 +21,8 @@ const MovieList = ({ data, type, head }) => {
                         <img
                             className={`img-fluid ${item.src ? "" : "backgroundAnimation"}`}
                             src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                            alt={''}
-                            style={{
-                                width: '241px',
-                                // height: '362px',
-                                // backgroundColor: item.src ? '' : 'lightgray' 
-                            }}
+                            alt={item.title || item.name}
+                            style={{ width: '241px' }}
                         />
                         <div className="card-body">
                             <h6 className="card-title">{item.title || item.name}</h6>

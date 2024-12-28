@@ -4,6 +4,7 @@ import LoadingSpin from "../components/ui/loadingSpin";
 import Footer from "../components/footer";
 import Header from "../components/ui/header";
 import { useState } from "react";
+import { Pagination } from "@mui/material";
 
 const TVSeries = () => {
     const API_URL = "https://api.themoviedb.org/3";
@@ -11,15 +12,16 @@ const TVSeries = () => {
 
     const [fetchKey, setFetchKey] = useState("/trending/tv/week");
     const [selectedButton, setSelectedButton] = useState("/trending/tv/week");
+    const [currentPage, setCurrentPage] = useState(1);
 
-    // Function to handle button click and update the state
     const handleButtonClick = (key) => {
         setFetchKey(key);
         setSelectedButton(key); // Update selected button
     };
 
+    // Fetch TV series data
     const fetchTVSeries = async () => {
-        const response = await fetch(API_URL + fetchKey + API_KEY);
+        const response = await fetch(API_URL + fetchKey + API_KEY + `&page=${currentPage}`);
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }
@@ -27,7 +29,7 @@ const TVSeries = () => {
     };
 
     const { data, error, isLoading } = useQuery({
-        queryKey: ["tv", fetchKey],
+        queryKey: ["tv", fetchKey, currentPage],
         queryFn: fetchTVSeries,
         refetchOnWindowFocus: false,
     });
@@ -45,6 +47,17 @@ const TVSeries = () => {
             {data?.results?.length > 0 && (
                 <CardAllItem data={data.results} type="tv" head="TV Series" />
             )}
+
+            {/* Pagination */}
+            {data?.results?.length > 0 && (
+                <Pagination
+                    count={data?.total_pages || 1} // Total pages
+                    page={currentPage}
+                    onChange={(event, page) => setCurrentPage(page)} // Change page
+                    sx={{ mt: 4, display: "flex", justifyContent: "center" }}
+                />
+            )}
+
             <Footer />
         </div>
     );
