@@ -30,55 +30,57 @@ This project is a React web application for discovering movies and TV shows usin
 
 ## Project structure
 
+```text
 movie/
 ├── public/
-│ ├── assets/
-│ │ └── cover/
-│ ├── detail.css
-│ ├── index.html
-│ ├── Slider.css
-│ └── style.css
+│   ├── assets/
+│   │   └── cover/
+│   ├── detail.css
+│   ├── index.html
+│   ├── Slider.css
+│   └── style.css
 ├── src/
-│ ├── api/
-│ │ ├── axios.js
-│ │ ├── endpoints.js
-│ │ ├── fetchWithCache.js
-│ │ └── getGenres.js
-│ ├── components/
-│ │ ├── card/
-│ │ │ ├── card.js
-│ │ │ └── cardAllItem.js
-│ │ ├── ui/
-│ │ │ ├── header.js
-│ │ │ └── loadingSpin.js
-│ │ ├── footer.js
-│ │ ├── navbar.js
-│ │ └── Slide.js
-│ ├── hooks/
-│ │ └── useFetch.js
-│ ├── routes/
-│ │ └── routes.js
-│ ├── service/
-│ │ ├── MovieDetails.js
-│ │ ├── TvDetails.js
-│ │ ├── TvShows.js
-│ │ ├── anime.js
-│ │ ├── home.js
-│ │ └── movies.js
-│ ├── utils/
-│ │ └── genreUtils.js
-│ └── index.js
+│   ├── api/
+│   │   ├── axios.js
+│   │   ├── endpoints.js
+│   │   ├── fetchWithCache.js
+│   │   └── getGenres.js
+│   ├── components/
+│   │   ├── card/
+│   │   │   ├── card.js
+│   │   │   └── cardAllItem.js
+│   │   ├── ui/
+│   │   │   ├── header.js
+│   │   │   └── loadingSpin.js
+│   │   ├── footer.js
+│   │   ├── navbar.js
+│   │   └── Slide.js
+│   ├── hooks/
+│   │   └── useFetch.js
+│   ├── routes/
+│   │   └── routes.js
+│   ├── service/
+│   │   ├── MovieDetails.js
+│   │   ├── TvDetails.js
+│   │   ├── TvShows.js
+│   │   ├── anime.js
+│   │   ├── home.js
+│   │   └── movies.js
+│   ├── utils/
+│   │   └── genreUtils.js
+│   └── index.js
 ├── build/
-│ ├── asset-manifest.json
-│ ├── index.html
-│ ├── Slider.css
-│ ├── style.css
-│ └── assets/
-│ └── cover/
+│   ├── asset-manifest.json
+│   ├── index.html
+│   ├── Slider.css
+│   ├── style.css
+│   └── assets/
+│       └── cover/
 ├── package.json
 ├── README.md
 ├── .env
 └── vercel.json
+```
 
 ## Getting started
 
