@@ -2,11 +2,11 @@
 
 ![Cover](public/assets/cover/movie.png)
 
-# Project Overview
+## Project Overview
 
 This project is a React web application for discovering movies and TV shows using The Movie Database (TMDB) API. It offers browsing, detailed view pages, caching, and a responsive interface.
 
-# Features
+## Features
 
 - Browse popular movies and trending TV shows
 - View detailed information for selected titles
@@ -16,7 +16,7 @@ This project is a React web application for discovering movies and TV shows usin
 - Pagination for large result sets
 - Responsive layout for desktop and mobile
 
-# Technology stack
+## Technology stack
 
 - React 18.3
 - React Router 6
@@ -28,7 +28,7 @@ This project is a React web application for discovering movies and TV shows usin
 - React Spinners
 - React Loader Spinner
 
-# Project structure
+## Project structure
 
 movie/
 ├── public/
@@ -80,20 +80,20 @@ movie/
 ├── .env
 └── vercel.json
 
-# Getting started
+## Getting started
 
-# Prerequisites
+### Prerequisites
 
 - Node.js 14 or newer
 - npm
 
-# Install dependencies
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-Run the application
+### Run the application
 
 ```bash
 npm start
@@ -101,17 +101,17 @@ npm start
 
 The app will run at http://localhost:3000 by default.
 
-# Configuration
+## Configuration
 
 The TMDB API key is included in `src/api/axios.js`. For a production setup, move the key to an environment variable and update the configuration to read from it.
 
-# Available scripts
+## Available scripts
 
 - `npm start`: Start the development server
 - `npm build`: Build the app for production
 - `npm test`: Run tests
 
-# How it works
+## How it works
 
 - `src/index.js` initializes React and React Query.
 - `src/routes/routes.js` defines main page routes.
@@ -121,7 +121,7 @@ The TMDB API key is included in `src/api/axios.js`. For a production setup, move
 - `src/api/fetchWithCache.js` caches API responses in localStorage.
 - `src/hooks/useFetch.js` provides a reusable data-fetching hook.
 
-# Deployment
+## Deployment
 
 Build the app with:
 
@@ -131,13 +131,13 @@ npm run build
 
 Deploy the `build/` directory to a static hosting service or Vercel.
 
-# Notes
+## Notes
 
 - The project uses TMDB API endpoints.
 - Caching is stored in the browser's localStorage.
 - The UI is built with Material UI components.
 
-# Future improvements
+## Future improvements
 
 - Add authentication and user profiles
 - Add a watchlist or favorites feature
