@@ -1,5 +1,5 @@
 Random Movies
-![Cover](./assets/cover/movie.png)
+![Cover](public/assets/cover/movie.png)
 
 Project Overview
 
